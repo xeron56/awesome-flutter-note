@@ -119,3 +119,5 @@ Here is a table of the parameters for the `ListView` widget:
   clipBehavior: Clip.hardEdge,
 )
 ```
+This ListView widget will display a vertical list of Text widgets, with a bouncing scroll physics, and a fixed item size of 50 pixels. It will also add automatic keep alives and repaint boundaries to each child, and assign semantic indexes to each child. The list will be cached up to 100 pixels beyond the visible area, and will dismiss the keyboard when the user starts dragging. The list will also have a restoration ID, which can be used to restore the scroll position when the app is restored.  
+  
