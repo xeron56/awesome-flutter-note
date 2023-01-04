@@ -91,3 +91,31 @@ Here is a table of the parameters for the `ListView` widget:
 | `keyboardDismissBehavior` | The behavior when the user dismisses the keyboard. Can be either `ScrollViewKeyboardDismissBehavior.manual` or `ScrollViewKeyboardDismissBehavior.onDrag`. | `keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag` |
 | `restorationId` | An ID that can be used to restore the scroll position when the app is restored. | `restorationId: 'my-list-view'` |
 | `clipBehavior` | How to clip the widgets that overflow the parent widget. Can be either `Clip.none`, `Clip.hardEdge`, or `Clip.antiAlias`. | `clipBehavior: Clip.antiAlias` |
+  
+  ```dart
+  ListView(
+  scrollDirection: Axis.vertical,
+  reverse: true,
+  controller: _scrollController,
+  primary: true,
+  physics: BouncingScrollPhysics(),
+  shrinkWrap: true,
+  padding: EdgeInsets.all(8.0),
+  itemExtent: 50.0,
+  prototypeItem: Text('Hello World'),
+  addAutomaticKeepAlives: true,
+  addRepaintBoundaries: true,
+  addSemanticIndexes: true,
+  cacheExtent: 100.0,
+  children: <Widget>[
+    Text('Item 1'),
+    Text('Item 2'),
+    Text('Item 3'),
+  ],
+  semanticChildCount: 3,
+  dragStartBehavior: DragStartBehavior.down,
+  keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
+  restorationId: 'my-list-view',
+  clipBehavior: Clip.hardEdge,
+)
+```
