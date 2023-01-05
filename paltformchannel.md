@@ -53,3 +53,191 @@ The jniLibs folder is used by the Android build system to package the native lib
 At runtime, the app can then use the System.loadLibrary method to load the native library and access its functions. The app specifies the name of the library (without the .so file extension) and the system will find the appropriate version of the library based on the device's CPU architecture.
 
 I hope this helps! Let me know if you have any questions or if you need further assistance.
+
+# most common flutter and android binding import packages
+
+```java
+import io.flutter.app.FlutterActivity;
+import io.flutter.embedding.engine.plugins.FlutterPlugin;
+import io.flutter.embedding.engine.plugins.activity.ActivityAware;
+import io.flutter.embedding.engine.plugins.activity.ActivityPluginBinding;
+import io.flutter.plugin.common.MethodCall;
+import io.flutter.plugin.common.MethodChannel;
+import io.flutter.plugin.common.MethodChannel.MethodCallHandler;
+import io.flutter.plugin.common.MethodChannel.Result;
+```
+Here is a table with a description of each of the imports in your code:
+
+| Import statement | Description |
+| --- | --- |
+| `import io.flutter.app.FlutterActivity;` | This import brings in the `FlutterActivity` class, which is the base class for activities that host a Flutter application. |
+| `import io.flutter.embedding.engine.plugins.FlutterPlugin;` | This import brings in the `FlutterPlugin` interface, which is the base interface for plugins that want to integrate with the Flutter application. |
+| `import io.flutter.embedding.engine.plugins.activity.ActivityAware;` | This import brings in the `ActivityAware` interface, which is an optional interface that a `FlutterPlugin` can implement to receive activity callbacks. |
+| `import io.flutter.embedding.engine.plugins.activity.ActivityPluginBinding;` | This import brings in the `ActivityPluginBinding` class, which represents a connection between a `FlutterActivity` and a `FlutterPlugin`. |
+| `import io.flutter.plugin.common.MethodCall;` | This import brings in the `MethodCall` class, which represents a method call from Flutter to the host platform. |
+| `import io.flutter.plugin.common.MethodChannel;` | This import brings in the `MethodChannel` class, which is a way for Flutter code to communicate with platform-specific code in the host platform. |
+| `import io.flutter.plugin.common.MethodChannel.MethodCallHandler;` | This import brings in the `MethodCallHandler` interface, which is a callback interface that is used to handle method calls from Flutter on a `MethodChannel`. |
+| `import io.flutter.plugin.common.MethodChannel.Result;` | This import brings in the `Result` class, which is a wrapper class that is used to return a result from a method call on a `MethodChannel`. |
+
+**`FlutterActivity`**
+
+```java
+Copy codepublic class MyActivity extends FlutterActivity {
+  @Override
+  protected void onCreate(Bundle savedInstanceState) {
+    super.onCreate(savedInstanceState);
+    // Your code here
+  }
+}
+
+```
+
+**`FlutterPlugin`**
+
+```java
+Copy codepublic class MyPlugin implements FlutterPlugin {
+  @Override
+  public void onAttachedToEngine(FlutterPluginBinding binding) {
+    // Your code here
+  }
+
+  @Override
+  public void onDetachedFromEngine(FlutterPluginBinding binding) {
+    // Your code here
+  }
+}
+
+```
+
+**`ActivityAware`**
+
+```java
+Copy codepublic class MyPlugin implements FlutterPlugin, ActivityAware {
+  @Override
+  public void onAttachedToActivity(ActivityPluginBinding binding) {
+    // Your code here
+  }
+
+  @Override
+  public void onDetachedFromActivityForConfigChanges() {
+    // Your code here
+  }
+
+  @Override
+  public void onReattachedToActivityForConfigChanges(ActivityPluginBinding binding) {
+    // Your code here
+  }
+
+  @Override
+  public void onDetachedFromActivity() {
+    // Your code here
+  }
+}
+
+```
+
+**`ActivityPluginBinding`**
+
+```java
+Copy codepublic class MyPlugin implements FlutterPlugin, ActivityAware {
+  @Override
+  public void onAttachedToActivity(ActivityPluginBinding binding) {
+    Activity activity = binding.getActivity();
+    // Use the activity object to do something
+  }
+}
+
+```
+
+**`MethodCall`**
+
+```java
+Copy codeMethodChannel channel = new MethodChannel(getFlutterView(), "my_channel");
+channel.setMethodCallHandler(new MethodCallHandler() {
+  @Override
+  public void onMethodCall(MethodCall call, Result result) {
+    if (call.method.equals("myMethod")) {
+      // Extract arguments from the method call
+      String argument1 = call.argument("arg1");
+      int argument2 = call.argument("arg2");
+
+      // Use the arguments in the method implementation
+      String resultString = myMethodImplementation(argument1, argument2);
+
+      // Return the result to Flutter
+      result.success(resultString);
+    } else {
+      result.notImplemented();
+    }
+  }
+});
+
+```
+
+**`MethodChannel`**
+
+```java
+Copy code// In the host platform code
+MethodChannel channel = new MethodChannel(getFlutterView(), "my_channel");
+channel.setMethodCallHandler(new MethodCallHandler() {
+  @Override
+  public void onMethodCall(MethodCall call, Result result) {
+    // Handle method calls from Flutter
+  }
+});
+
+// In the Flutter code
+final MethodChannel channel = MethodChannel('my_channel');
+final String result = await channel.invokeMethod('myMethod', yourMethodArgs);
+print(result);
+
+```
+
+**`MethodCallHandler`**
+
+```java
+MethodChannel channel = new MethodChannel(getFlutterView(), "my_channel");
+channel.setMethodCallHandler(new MethodCallHandler() {
+  @Override
+  public void onMethodCall(MethodCall call, Result result) {
+    if (call.method.equals("myMethod")) {
+      // Extract arguments from the method call
+      String argument1 = call.argument("arg1");
+      int argument2 = call.argument("arg2");
+
+      // Use the arguments in the method implementation
+      String resultString = myMethodImplementation(argument1, argument2);
+
+      // Return the result to Flutter
+      result.success(resultString);
+    } else {
+      result.notImplemented();
+    }
+  }
+});
+
+```
+
+**`MethodChannel.Result`**
+
+```java
+MethodChannel channel = new MethodChannel(getFlutterView(), "my_channel");
+channel.setMethodCallHandler(new MethodCallHandler() {
+  @Override
+  public void onMethodCall(MethodCall call, Result result) {
+    if (call.method.equals("myMethod")) {
+      // Extract arguments from the method call
+      String argument1 = call.argument("arg1");
+      int argument2 = call.argument("arg2");
+
+      // Use the arguments in the method implementation
+      String resultString = myMethodImplementation(argument1, argument2);
+
+      // Return the result to Flutter
+      result.success(resultString);
+    } else {
+      result.notImplemented();
+    }
+  }
+});
+```
