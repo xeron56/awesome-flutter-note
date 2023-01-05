@@ -91,6 +91,12 @@ Copy codepublic class MyActivity extends FlutterActivity {
 }
 
 ```
+This code defines a new class called `MyActivity`, which extends the `FlutterActivity` class. The `FlutterActivity` class is the base class for activities that host a Flutter application.
+
+The `MyActivity` class overrides the `onCreate` method, which is a lifecycle method of the `Activity` class. The `onCreate` method is called when the activity is first created.
+
+Inside the `onCreate` method, the `super.onCreate` method is called to ensure that the default `onCreate` behavior is executed. This is followed by a comment that says "Your code here", which indicates that you can add your own code to the method.
+
 
 **`FlutterPlugin`**
 
@@ -135,6 +141,23 @@ Copy codepublic class MyPlugin implements FlutterPlugin, ActivityAware {
 }
 
 ```
+This code defines a new class called `MyPlugin`, which implements the `FlutterPlugin` interface and the `ActivityAware` interface.
+
+The `FlutterPlugin` interface is the base interface for plugins that want to integrate with the Flutter application, and the `ActivityAware` interface is an optional interface that a `FlutterPlugin` can implement to receive activity callbacks.
+
+The `MyPlugin` class overrides four methods of the `ActivityAware` interface: `onAttachedToActivity`, `onDetachedFromActivityForConfigChanges`, `onReattachedToActivityForConfigChanges`, and `onDetachedFromActivity`.
+
+The `onAttachedToActivity` method is called when the plugin is attached to an activity. The `ActivityPluginBinding` object passed to the method provides access to the activity and the plugin registry.
+
+The `onDetachedFromActivityForConfigChanges` method is called when the plugin is detached from an activity due to a configuration change.
+
+The `onReattachedToActivityForConfigChanges` method is called when the plugin is reattached to an activity after a configuration change. The `ActivityPluginBinding` object passed to the method provides access to the activity and the plugin registry.
+
+The `onDetachedFromActivity` method is called when the plugin is detached from an activity.
+
+Inside all four methods, there is a comment that says "Your code here", which indicates that you can add your own code to the methods.
+
+
 
 **`ActivityPluginBinding`**
 
