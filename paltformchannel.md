@@ -44,3 +44,12 @@ methodChannel.setMethodCallHandler(new MethodChannel.MethodCallHandler() {
 You can pass any arguments you want from the Flutter code to the Java code as the `arguments` parameter in the `invokeMethod` call. The Java code can then access these arguments and use them in the method implementation.
 
 To pass data back from the Java code to the Flutter code, you can use the `success` or `error` method of the `Result` object. The Flutter code will receive the data passed to these methods as the result of the `invokeMethod` call.
+
+# jini libs folder uses 
+The jniLibs folder in an Android project typically contains native code libraries that are written in languages such as C or C++. These libraries are compiled for different CPU architectures, such as ARM, x86, and MIPS, and are stored in the respective subfolders (e.g., armeabi, x86, etc.).
+
+The jniLibs folder is used by the Android build system to package the native libraries into the APK file. When the app is installed on a device, the system will extract the native libraries from the APK and put them in a location on the device where the app can access them.
+
+At runtime, the app can then use the System.loadLibrary method to load the native library and access its functions. The app specifies the name of the library (without the .so file extension) and the system will find the appropriate version of the library based on the device's CPU architecture.
+
+I hope this helps! Let me know if you have any questions or if you need further assistance.
