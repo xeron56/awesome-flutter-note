@@ -309,3 +309,33 @@ class MainActivity : AppCompatActivity() {
     }
 }
 ```
+
+# nullsafty in kotlin
+
+In Kotlin, null safety is a feature that helps to prevent null reference exceptions by allowing you to specify whether a variable or property can hold a null value. This is achieved through the use of nullable and non-nullable types.
+
+A nullable type is a type that can hold either a value or `null`. A non-nullable type is a type that can only hold a value, and not `null`.
+
+Here is a table that shows the syntax for nullable and non-nullable types in Kotlin:
+
+| Syntax | Description |
+| --- | --- |
+| `T?` | A nullable type that can hold a value of type `T` or `null` |
+| `T` | A non-nullable type that can only hold a value of type `T` |
+
+Here is an example of how nullable and non-nullable types might be used in Kotlin:
+
+```kotlin
+fun test(str: String?) {  // str is a nullable String
+    if (str != null) {  // Check if str is not null before using it
+        println(str.length)  // OK, str is not null
+    }
+}
+
+fun test(str: String) {  // str is a non-nullable String
+    println(str.length)  // OK, str is not null
+}
+
+```
+
+In the first example, the `test` function takes a nullable `String` as an argument. The value of the `str` argument is checked for null before using it,
