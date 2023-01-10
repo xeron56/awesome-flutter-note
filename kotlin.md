@@ -362,3 +362,79 @@ Here is a table with some of the basic syntax elements of Kotlin, along with des
 | `sealed class` | Declares a class that can have a limited number of subclasses, all of which must be declared in the same file | `sealed class Shape { class Circle(val radius: Double) : Shape() class Rectangle(val width: Double, val height: Double) : Shape() }` |
 | `operator overloading` | Allows you to define custom behavior for operator symbols such as `+` and `*` | \`operator fun Point.plus(other: Point): Point { return Point(x + other |
 
+# Explain 
+ ```kotlin
+ ActivityCompat.startActivityForResult(this, gallery, 1, null); 
+ ```
+ In this code snippet, the `startActivityForResult` method of the `ActivityCompat` class is called. The `startActivityForResult` method is a utility method that is used to start another activity and receive a result back.
+
+The first argument to the `startActivityForResult` method is the `Context` object that is used to start the activity. In this case, the `this` keyword is used to refer to the current `Activity`.
+
+The second argument is an `Intent` object that specifies the activity to be started. In this case, the `gallery` variable is an `Intent` object that is used to start the gallery activity.
+
+The third argument is a request code that is used to identify the result when it is returned. In this case, the request code is `1`.
+
+The fourth argument is an options bundle that is used to supply additional options for the activity. In this case, the options bundle is `null`.
+
+When the `startActivityForResult` method is called, the specified activity is started and the current activity is paused. When the started activity finishes, it returns a result to the current activity through the `onActivityResult` callback method. The request code and the result data are passed as arguments to the `onActivityResult` method, allowing the current activity to identify the result and process it as needed.
+
+an example of how you might use the `startActivityForResult` method in an `Activity` class in Kotlin to start the camera activity and receive a result back:
+
+```kotlin
+private val CAMERA_REQUEST_CODE = 1
+
+private fun takePicture() {
+    // Create an intent to open the camera
+    val cameraIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
+
+    // Start the camera activity and wait for a result
+    startActivityForResult(cameraIntent, CAMERA_REQUEST_CODE)
+}
+
+override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+    if (requestCode == CAMERA_REQUEST_CODE) {
+        // Check if the result is OK
+        if (resultCode == Activity.RESULT_OK) {
+            // Get the image data from the intent
+            val image = data?.extras?.get("data") as Bitmap
+
+            // Do something with the image
+            imageView.setImageBitmap(image)
+        }
+    }
+}
+
+```
+
+In this example, the `takePicture` function is called to start the camera activity. When the camera activity finishes, the `onActivityResult` method is called with the request code, result code, and data from the intent. The request code is checked to ensure that it is the correct code for the camera activity, and if the result is OK, the image data is retrieved from the intent and used to set the image of an `ImageView`.
+
+I hope this example gives you a sense of how you can use the `startActivityForResult`
+
+I have a scanner application which actually takes photo from the gallery with this code 
+
+```kotlin
+ActivityCompat.startActivityForResult(this, gallery, 1, null); 
+```
+again after selecting a picture from the gallery this code actually Run 
+
+```kotlin
+override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+```
+
+Now explain me the whole scenario
+
+In this scenario, you have a scanner application that allows the user to select a picture from the gallery.
+
+First, the `ActivityCompat.startActivityForResult(this, gallery, 1, null)` method is called. This method starts the activity specified by the `Intent` object `gallery` and it also assigns a request code of `1` and no options bundle. The `this` keyword refers to the current `Activity` context and thus the gallery activity is launched on top of it.
+
+After the user selects a picture from the gallery, the started activity (the gallery) finishes and sends a result back to the current activity. This result is received by the `onActivityResult` method.
+
+The `onActivityResult` method is a callback method that is called when an activity started with `startActivityForResult` finishes and sends a result back. It takes 3 arguments:
+
+-   `requestCode`: an integer that is used to identify the result, in this case it is 1 which is the request code that was passed to the `startActivityForResult` method
+-   `resultCode`: an integer that represents the status of the result, in this case it's likely `Activity.RESULT_OK` if the picture is selected successfully.
+-   `data`: an `Intent` object that contains the result data, in this case it contains the picture selected from the gallery.
+
+The implementation of this method checks the request code and the result code to ensure that it is the correct result for the picture selected from the gallery, and if that is the case it can then extract the picture data and use it in further processing such as displaying it on the screen or sending it to be scanned.
+
+Note that, The `ActivityCompat` class is a compatibility class that allows you to use activity related APIs across different versions of Android in a backwards-compatible way, so you dont have to write different codes for different versions of android to support different level of android.
