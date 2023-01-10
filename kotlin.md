@@ -166,3 +166,75 @@ val intent4 = Intent(this, ScanActivity::class.java, extras)
 val intent5 = Intent(this, ScanActivity::class.java).setPackage("com.example")
 
 ```
+To go from one Android screen (i.e., activity) to another, you can use an `Intent` object in your code. An `Intent` is an object that is used to communicate between Android components, such as activities, services, and broadcast receivers. It is essentially a message that can be used to request an action from another component.
+
+To use an `Intent` to start a new activity, you can use the `startActivity` method and pass it the `Intent` object. For example:
+
+```kotlin
+Copy codeval intent = Intent(this, SecondActivity::class.java)
+startActivity(intent)
+
+```
+
+This code creates an `Intent` that is used to start the `SecondActivity` class, and then calls the `startActivity` method with the `Intent` as an argument to start the new activity.
+
+To send data from one activity to another, you can use the `putExtra` method of the `Intent` object to include the data as an extra. For example:
+
+```kotlin
+Copy codeval intent = Intent(this, SecondActivity::class.java)
+intent.putExtra("message", "Hello, World!")
+startActivity(intent)
+
+```
+
+This code creates an `Intent` as before, but also includes a message as an extra with the key "message" and the value "Hello, World!". The message can then be retrieved in the second activity by calling the `getStringExtra` method on the `Intent` object:
+
+```kotlin
+Copy codeval message = intent.getStringExtra("message")
+
+```
+
+You can also use the `putExtra` method to include other types of data as extras, such as integers, booleans, and parcelable objects.
+
+
+
+ example code that demonstrates how to go from one activity to another and pass data between them:
+
+**File: MainActivity.kt**
+
+```kotlin
+Copy codeclass MainActivity : AppCompatActivity() {
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_main)
+
+        button.setOnClickListener {
+            val intent = Intent(this, SecondActivity::class.java)
+            intent.putExtra("message", "Hello, World!")
+            startActivity(intent)
+        }
+    }
+}
+
+```
+
+**File: SecondActivity.kt**
+
+```kotlin
+Copy codeclass SecondActivity : AppCompatActivity() {
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_second)
+
+        val message = intent.getStringExtra("message")
+        textView.text = message
+    }
+}
+
+```
+
+In this example, the `MainActivity` class has a button that, when clicked, starts the `SecondActivity` class and passes a message as an extra. The `SecondActivity` class retrieves the message from the `Intent` object and displays it in a `TextView`.
+
+It is worth noting that the `SecondActivity` class must be declared in the `AndroidManifest.xml` file in order for it to be able to receive the `Intent` and be launched by the system.
