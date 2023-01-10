@@ -10,7 +10,7 @@ The `implements` keyword is used to indicate that the `ScanActivity` class will 
 
 It is also worth noting that `BaseActivity` and `IScanView.Proxy` are both types that are defined elsewhere in the code.
 
-Encapsulation:
+# Encapsulation:
 
 Encapsulation is the process of wrapping up data and methods that operate on that data within a single unit, or object. Here is an example of encapsulation in Kotlin:
 
@@ -31,7 +31,7 @@ Copy codeclass BankAccount {
 
 In this example, the `balance` variable is private and can only be accessed within the `BankAccount` class. The `deposit` and `getBalance` methods provide a way to modify and access the value of `balance`, respectively. This allows the implementation details of the `BankAccount` class to be hidden from other classes, which promotes encapsulation.
 
-Inheritance:
+# Inheritance:
 
 Inheritance is the process of creating a new class that is a modified version of an existing class. The new class is called the subclass, and the existing class is the superclass. Here is an example of inheritance in Kotlin:
 
@@ -58,7 +58,7 @@ class Truck(make: String, model: String, val payload: Double) : Vehicle(make, mo
 
 In this example, the `Vehicle` class is the superclass, and the `Car` and `Truck` classes are subclasses that inherit from it. The `Car` and `Truck` classes override the `startEngine` method from the `Vehicle` class to provide their own implementation.
 
-Polymorphism:
+# Polymorphism:
 
 Polymorphism is the ability of an object to take on multiple forms. In Kotlin, polymorphism is often achieved through inheritance and method overriding. Here is an example of polymorphism in Kotlin:
 
@@ -82,10 +82,21 @@ class Truck(make: String, model: String, val payload: Double) : Vehicle(make, mo
 }
 
 fun main() {
-    val vehicles = arrayOf(Car("Toyota", "Camry", 2020), Truck("Ford", "F-150
-```
+    val vehicles = arrayOf(Car("Toyota", "Camry", 2020), Truck("Ford", "F-150", 2500.0))
 
-Abstraction:
+    for (vehicle in vehicles) {
+        vehicle.startEngine()  // polymorphic behavior: the startEngine method is called on each object, but the actual implementation depends on the type of the object
+    }
+}
+
+```
+In this code snippet, the `vehicles` array contains two objects: a `Car` and a `Truck`. Both of these objects are instances of subclasses of the `Vehicle` class, which means that they have access to the `startEngine` method inherited from the `Vehicle` class.
+
+When the `startEngine` method is called on each object in the `vehicles` array, the actual implementation of the method that is called depends on the type of the object. For example, when the `startEngine` method is called on the `Car` object, the implementation from the `Car` class is called, which prints "Car engine started." Similarly, when the `startEngine` method is called on the `Truck` object, the implementation from the `Truck` class is called, which prints "Truck
+
+engine started." This is an example of polymorphic behavior, as the same method (`startEngine`) can have different behavior depending on the type of object it is called on
+
+# Abstraction:
 
 Abstraction is the process of exposing only the essential characteristics and behavior of an object, while hiding the implementation details. In Kotlin, abstraction can be achieved through the use of abstract classes and methods. Here is an example of abstraction in Kotlin:
 
