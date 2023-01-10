@@ -339,3 +339,26 @@ fun test(str: String) {  // str is a non-nullable String
 ```
 
 In the first example, the `test` function takes a nullable `String` as an argument. The value of the `str` argument is checked for null before using it,
+
+# Kotlin syntax
+Here is a table with some of the basic syntax elements of Kotlin, along with descriptions and examples:
+
+| Syntax | Description | Example |
+| --- | --- | --- |
+| `val` | Declares a read-only variable | `val x = 3` |
+| `var` | Declares a mutable variable | `var y = "hello"` |
+| `fun` | Declares a function | `fun add(x: Int, y: Int): Int { return x + y }` |
+| `class` | Declares a class | `class Person(val name: String, var age: Int)` |
+| `interface` | Declares an interface | `interface Shape { fun area(): Double }` |
+| `enum` | Declares an enumeration | `enum class Color { RED, GREEN, BLUE }` |
+| `object` | Declares a singleton object | `object Singleton { fun foo() { } }` |
+| `for` | Declares a loop | `for (i in 1..10) { print(i) }` |
+| `when` | Declares a switch statement | `when (x) { 1 -> print("x is 1") 2 -> print("x is 2") else -> print("x is something else") }` |
+| `try/catch` | Declares a try/catch block for handling exceptions | `try { doSomething() } catch (e: Exception) { print(e) }` |
+| `data class` | Declares a class that is used to hold data | `data class Person(val name: String, var age: Int)` |
+| `typealias` | Defines an alias for a type | `typealias StringList = List<String>` |
+| `inline fun` | Declares an inline function, which can improve performance when working with lambdas | `inline fun <T> withLock(lock: Lock, action: () -> T): T { lock.lock(); try { return action() } finally { lock.unlock() } }` |
+| `reified type parameters` | Allows you to access the type of a type parameter at runtime | `inline fun <reified T> getType(): String { return T::class.java.simpleName }` |
+| `sealed class` | Declares a class that can have a limited number of subclasses, all of which must be declared in the same file | `sealed class Shape { class Circle(val radius: Double) : Shape() class Rectangle(val width: Double, val height: Double) : Shape() }` |
+| `operator overloading` | Allows you to define custom behavior for operator symbols such as `+` and `*` | \`operator fun Point.plus(other: Point): Point { return Point(x + other |
+
