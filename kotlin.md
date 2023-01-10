@@ -238,3 +238,74 @@ Copy codeclass SecondActivity : AppCompatActivity() {
 In this example, the `MainActivity` class has a button that, when clicked, starts the `SecondActivity` class and passes a message as an extra. The `SecondActivity` class retrieves the message from the `Intent` object and displays it in a `TextView`.
 
 It is worth noting that the `SecondActivity` class must be declared in the `AndroidManifest.xml` file in order for it to be able to receive the `Intent` and be launched by the system.
+
+**lifecycle methods of an `Activity`**
+table that lists the lifecycle methods of an `Activity` in Kotlin and a brief description of each method:
+
+| Method | Description |
+| --- | --- |
+| `onCreate(savedInstanceState: Bundle?)` | Called when the activity is first created. This is where you should initialize the activity, such as setting the content view and any other views or variables that are needed. The `savedInstanceState` parameter is a `Bundle` object that contains the saved state of the activity, if there is one. |
+| `onStart()` | Called when the activity becomes visible to the user. This is a good place to start animations and start updates to the activity's UI. |
+| `onResume()` | Called when the activity becomes the foreground activity and the user can start interacting with it. This is a good place to resume any paused actions or start any updates that should occur while the activity is in the foreground. |
+| `onPause()` | Called when the activity is no longer the foreground activity and the user is about to navigate away from it. This is a good place to pause any ongoing updates or stop any animations that are running. |
+| `onStop()` | Called when the activity is no longer visible to the user. This is a good place to stop any updates that are not needed when the activity is not visible. |
+| `onDestroy()` | Called when the activity is being destroyed. This is a good place to release any resources that are no longer needed. |
+
+It is important to understand the lifecycle of an `Activity` and the appropriate time to perform certain actions, as this can help you to write efficient and reliable code.
+
+```kotlin
+class MainActivity : AppCompatActivity() {
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_main)
+
+        // Initialize the activity here
+        // For example:
+        val button = findViewById<Button>(R.id.button)
+        button.setOnClickListener {
+            // Do something when the button is clicked
+        }
+    }
+
+    override fun onStart() {
+        super.onStart()
+
+        // Start animations or updates to the UI here
+        // For example:
+        loadingIndicator.visibility = View.VISIBLE
+    }
+
+    override fun onResume() {
+        super.onResume()
+
+        // Resume any paused actions or start updates that should occur while the activity is in the foreground here
+        // For example:
+        refreshData()
+    }
+
+    override fun onPause() {
+        super.onPause()
+
+        // Pause any ongoing updates or stop animations here
+        // For example:
+        stopUpdates()
+    }
+
+    override fun onStop() {
+        super.onStop()
+
+        // Stop any updates that are not needed when the activity is not visible here
+        // For example:
+        stopBackgroundUpdates()
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+
+        // Release any resources that are no longer needed here
+        // For example:
+        unregisterReceiver(receiver)
+    }
+}
+```
