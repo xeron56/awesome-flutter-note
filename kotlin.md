@@ -131,4 +131,38 @@ In this example, the `Shape` class is an abstract class that cannot be instantia
 
 This allows the `Shape` class to provide a common interface for calculating the area and perimeter of different shapes, while hiding the implementation details of how those calculations are performed.
 
+# Intent
 
+An `Intent` in Kotlin is an object that is used to communicate between Android components, such as activities, services, and broadcast receivers. It is essentially a message that can be used to request an action from another component.
+
+Here is a table with some examples of how the `Intent` constructor can be used in Kotlin:
+
+| Syntax | Description |
+| --- | --- |
+| `Intent(context: Context, cls: Class<*>)` | Create an `Intent` to start the specified class |
+| `Intent(action: String)` | Create an `Intent` with the specified action |
+| `Intent(action: String, uri: Uri)` | Create an `Intent` with the specified action and data URI |
+| `Intent(context: Context, cls: Class<*>, bundle: Bundle)` | Create an `Intent` to start the specified class with the specified bundle of extras |
+| `Intent(packageContext: Context, cls: Class<*>)` | Create an `Intent` to start the specified class within the specified package |
+
+Here is an example of how each of these constructors might be used:
+
+```kotlin
+Copy code// Start the ScanActivity class
+val intent1 = Intent(this, ScanActivity::class.java)
+
+// Send a broadcast with the action "com.example.action.SEND_MESSAGE"
+val intent2 = Intent("com.example.action.SEND_MESSAGE")
+
+// Open the "https://www.example.com" URL in a web browser
+val intent3 = Intent(Intent.ACTION_VIEW, Uri.parse("https://www.example.com"))
+
+// Start the ScanActivity class with a bundle of extras
+val extras = Bundle()
+extras.putString("message", "Hello, World!")
+val intent4 = Intent(this, ScanActivity::class.java, extras)
+
+// Start the ScanActivity class within the com.example package
+val intent5 = Intent(this, ScanActivity::class.java).setPackage("com.example")
+
+```
